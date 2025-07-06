@@ -1,0 +1,90 @@
+id: general-programming-principles
+version: 0.1.0
+metadata:
+  name: General Programming Principles
+  description: null
+  tags: [programming]
+  priority: 10
+  auto_apply: true
+content:
+- title: General Programming Principles
+  format: markdown
+  value: These are language and framework-agnostic principles to follow for building robust, maintainable, and high-quality software.
+- title: 1. Development Process & Planning
+  format: markdown
+  value: |-
+    **a. Maintain a Development Plan:**
+    - Always maintain a clear development plan, task list, or TODO list. This serves as the single source of truth for the project's status.
+    - Before starting work, break down complex features into smaller, manageable steps.
+    - Always refer to the development plan for the latest status and to decide on the next steps.
+    - Always keep the development plan up-to-date after any modifications or task completion.
+
+    **b. Proactive Communication:**
+    - If requirements are unclear or ambiguous, ask for clarification immediately. It is more efficient to clarify upfront than to rework later.
+    - Explain your implementation plan before making significant changes.
+- title: 2. Code Quality and Correctness
+  format: markdown
+  value: |-
+    **a. Comprehensive Testing:**
+    - **Unit Tests:** Always generate unit tests for methods and functions to verify their correctness in isolation. Cover happy paths, edge cases, and error conditions.
+    - **Integration Tests:** Create integration tests for application behaviors to ensure that different parts of your system work correctly together.
+    - **End-to-End Tests:** For applications with a user interface or external APIs, write tests that simulate real user workflows from start to finish.
+
+    **b. Write Clean and Simple Code:**
+    - **KISS (Keep It Simple, Stupid):** Prefer simple, straightforward solutions. Avoid unnecessary complexity.
+    - **Readability:** Write code for humans first, machines second. Use clear, descriptive names for variables, functions, and classes.
+    - **DRY (Don't Repeat Yourself):** Avoid duplicating code. Abstract common logic into reusable functions, modules, or classes.
+
+    **c. Follow Established Design Principles:**
+    - **Single Responsibility Principle (SRP):** Each module, class, or function should have one primary responsibility and reason to change.
+    - **Defensive Programming:** Anticipate potential issues. Validate inputs, handle errors gracefully, and don't make assumptions about external systems.
+- title: 3. Maintenance and Evolution
+  format: markdown
+  value: |-
+    **a. Practice Continuous Refactoring:**
+    - Follow the "boy scout rule": always leave the code cleaner than you found it.
+    - Regularly refactor to improve the design, reduce technical debt, and adapt to new requirements.
+
+    **b. Use Version Control Effectively:**
+    - Make small, atomic commits with clear, descriptive messages. A commit should represent a single logical change.
+    - Use branches for new features and bug fixes to keep the main branch stable.
+
+    **c. Document What Matters:**
+    - Document *why* the code exists, not *what* it does. The code itself should explain the "what".
+    - Focus on documenting architectural decisions, complex algorithms, and public APIs.
+- title: 4. Security & Privacy
+  format: markdown
+  value: |-
+    **a. Validate and Sanitize Inputs:**
+    - Never trust external input. Validate and sanitize all data before processing or persisting it.
+    - Escape or encode outputs to prevent injection attacks.
+
+    **b. Principle of Least Privilege:**
+    - Grant only the minimum permissions necessary to each component or process.
+    - Rotate credentials regularly and store secrets securely.
+
+    **c. Protect Sensitive Data:**
+    - Encrypt sensitive data both in transit and at rest.
+    - Comply with relevant regulations (e.g., GDPR, HIPAA, PCI-DSS) when handling personal or financial data.
+- title: 5. Performance & Observability
+  format: markdown
+  value: |-
+    **a. Measure, Then Optimize:**
+    - Use profiling and benchmarks to identify bottlenecks before attempting optimizations.
+    - Set performance budgets and track them over time.
+
+    **b. Instrumentation & Monitoring:**
+    - Emit structured logs, metrics, and traces to gain insight into system behavior in production.
+    - Set up alerts for key service-level indicators (SLIs) and service-level objectives (SLOs).
+- title: 6. Sustainability & Housekeeping
+  format: markdown
+  value: |-
+    **a. Dependency Management:**
+    - Keep third-party dependencies up to date and monitor for security advisories.
+    - Prefer well-maintained libraries with permissive licenses.
+
+    **b. Archiving & Cleanup:**
+    - Remove unused code, configurations, and resources regularly to reduce attack surface and maintenance burden.
+references: []
+conditions: []
+tool_overrides: {}

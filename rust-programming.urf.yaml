@@ -1,0 +1,158 @@
+# =====================================================================
+#  UNIVERSAL RULE FILE (URF) – SINGLE SOURCE OF TRUTH
+#
+#  This file defines a rule that can be deployed to all AI coding tools:
+#  - Cursor (.cursor/rules/*.mdc)
+#  - Cline (.clinerules/*.md)
+#  - Claude Code (CLAUDE.md)
+#  - Goose (.goosehints)
+#
+#  INSTRUCTIONS:
+#  1. Replace all <placeholders> with your content
+#  2. Delete these instruction comments when done
+#  3. Save and run: rulesify deploy --all
+# =====================================================================
+
+# Unique identifier for this rule (auto-filled from filename)
+id: rust-programming
+
+# Semantic version - increment when making breaking changes
+version: 0.1.0
+
+# Core metadata that appears in all exported formats
+metadata:
+  # Human-readable name - becomes H1 heading in exported files
+  name: "The Golden Rule of Rust Programming"
+
+  # Brief description - shows up in Cursor frontmatter and tool descriptions
+  description: |
+    "Embrace the Borrow Checker, Design for Ownership"
+    When writing Rust code, always think ownership-first and let the compiler guide you toward memory-safe, concurrent-ready solutions.
+
+  # Tags for categorization and search (e.g. [react, typescript, testing])
+  tags: [rust, programming]
+
+  # Priority for rule ordering: 1 (low) → 10 (high)
+  priority: 10
+
+  # Auto-apply: if true, Cursor will always apply this rule
+  auto_apply: true
+
+# Content sections - these become H2 headings in exported files
+content:
+  - title: "Core Principles"
+    format: markdown
+    value: |-
+      **1. Ownership and Borrowing**
+      - Design your APIs around clear ownership semantics
+      - Prefer borrowing (`&T`) over moving when you don't need ownership
+      - Use `&mut T` only when you need to modify data
+      - Avoid fighting the borrow checker—redesign your approach instead
+
+      **2. Error Handling**
+      - Use `Result<T, E>` for recoverable errors, never `unwrap()` in production
+      - Use `Option<T>` for nullable values instead of null pointers
+      - Propagate errors with `?` operator for cleaner code
+      - Create custom error types that implement `std::error::Error`
+
+      **3. Memory Safety**
+      - Leverage RAII (Resource Acquisition Is Initialization)
+      - Use smart pointers (`Box<T>`, `Rc<T>`, `Arc<T>`) when ownership is complex
+      - Prefer stack allocation over heap allocation when possible
+      - Use `Vec<T>` instead of raw arrays for dynamic data
+
+      **4. Concurrency**
+      - Design with `Send` and `Sync` traits in mind
+      - Use `Arc<Mutex<T>>` for shared mutable state across threads
+      - Prefer channels for communication between threads
+      - Avoid `unsafe` blocks unless absolutely necessary
+
+      **5. Performance**
+      - Profile before optimizing
+      - Use iterators instead of manual loops—they're zero-cost abstractions
+      - Prefer `&str` over `String` for string slices
+      - Use `Cow<str>` when you might need either borrowed or owned strings
+
+      **6. Code Organization**
+      - Use modules to organize code logically
+      - Keep public APIs minimal and well-documented
+      - Write comprehensive tests alongside your code
+      - Use `cargo fmt` and `cargo clippy` consistently
+
+  - title: "Example Application"
+    format: markdown
+    value: |-
+      ```rust
+      // Good: Clear ownership, proper error handling
+      fn process_user_data(users: &[User]) -> Result<Vec<ProcessedUser>, ProcessingError> {
+          users
+              .iter()
+              .map(|user| user.process())
+              .collect()
+      }
+
+      // Bad: Unnecessary cloning, poor error handling
+      fn process_user_data_bad(users: Vec<User>) -> Vec<ProcessedUser> {
+          users
+              .into_iter()
+              .map(|user| user.process().unwrap())
+              .collect()
+      }
+      ```
+
+  - title: "Remember"
+    format: markdown
+    value: |-
+      The borrow checker is your friend, not your enemy. When it complains, it's preventing potential bugs, data races, and memory issues that would be runtime errors in other languages. Design your code to work with Rust's ownership system rather than against it.
+
+# OPTIONAL: Add more content sections by copying the pattern above
+#  - title: "Examples"
+#    format: markdown
+#    value: |-
+#      ```typescript
+#      // Good: Use descriptive names
+#      interface UserProps {
+#        name: string;
+#        email: string;
+#      }
+#
+#      // Bad: Vague names
+#      interface Props {
+#        a: string;
+#        b: string;
+#      }
+#      ```
+
+# OPTIONAL: Reference external files (appears as @filename in Cursor)
+references: []             # Example: [@README.md, @docs/style-guide.md]
+
+# OPTIONAL: File patterns that trigger auto-attachment
+conditions: []             # Example: [type: file_pattern, value: "src/**/*.ts"]
+
+# =====================================================================
+#  TOOL-SPECIFIC OVERRIDES
+#  These settings only apply to specific tools and are ignored by others
+# =====================================================================
+
+tool_overrides:
+  # Cursor-specific settings
+  cursor:
+    globs: []              # File patterns: [src/**/*.tsx, src/**/*.jsx]
+
+  # Cline-specific settings
+  cline: {}
+
+  # Claude Code-specific settings
+  claude-code: {}
+
+  # Goose-specific settings
+  goose: {}
+
+# =====================================================================
+#  USAGE EXAMPLES:
+#
+#  Deploy to all tools:     rulesify deploy --all
+#  Deploy to Cursor only:   rulesify deploy --tool cursor --rule rust-programming
+#  Edit this rule:          rulesify rule edit rust-programming
+#  View deployed rules:     rulesify rule list
+# =====================================================================
