@@ -40,90 +40,75 @@ metadata:
 
 # Content sections - these become H2 headings in exported files
 content:
-  - title: "Core Principles"
-    format: markdown
-    value: |-
-      **1. Ownership and Borrowing**
-      - Design your APIs around clear ownership semantics
-      - Prefer borrowing (`&T`) over moving when you don't need ownership
-      - Use `&mut T` only when you need to modify data
-      - Avoid fighting the borrow checker—redesign your approach instead
-
-      **2. Error Handling**
-      - Use `Result<T, E>` for recoverable errors, never `unwrap()` in production
-      - Use `Option<T>` for nullable values instead of null pointers
-      - Propagate errors with `?` operator for cleaner code
-      - Create custom error types that implement `std::error::Error`
-
-      **3. Memory Safety**
-      - Leverage RAII (Resource Acquisition Is Initialization)
-      - Use smart pointers (`Box<T>`, `Rc<T>`, `Arc<T>`) when ownership is complex
-      - Prefer stack allocation over heap allocation when possible
-      - Use `Vec<T>` instead of raw arrays for dynamic data
-
-      **4. Concurrency**
-      - Design with `Send` and `Sync` traits in mind
-      - Use `Arc<Mutex<T>>` for shared mutable state across threads
-      - Prefer channels for communication between threads
-      - Avoid `unsafe` blocks unless absolutely necessary
-
-      **5. Performance**
-      - Profile before optimizing
-      - Use iterators instead of manual loops—they're zero-cost abstractions
-      - Prefer `&str` over `String` for string slices
-      - Use `Cow<str>` when you might need either borrowed or owned strings
-
-      **6. Code Organization**
-      - Use modules to organize code logically
-      - Keep public APIs minimal and well-documented
-      - Write comprehensive tests alongside your code
-      - Use `cargo fmt` and `cargo clippy` consistently
-
-  - title: "Example Application"
-    format: markdown
-    value: |-
-      ```rust
-      // Good: Clear ownership, proper error handling
-      fn process_user_data(users: &[User]) -> Result<Vec<ProcessedUser>, ProcessingError> {
-          users
-              .iter()
-              .map(|user| user.process())
-              .collect()
-      }
-
-      // Bad: Unnecessary cloning, poor error handling
-      fn process_user_data_bad(users: Vec<User>) -> Vec<ProcessedUser> {
-          users
-              .into_iter()
-              .map(|user| user.process().unwrap())
-              .collect()
-      }
-      ```
-
-  - title: "Remember"
-    format: markdown
-    value: |-
-      The borrow checker is your friend, not your enemy. When it complains, it's preventing potential bugs, data races, and memory issues that would be runtime errors in other languages. Design your code to work with Rust's ownership system rather than against it.
-
-# OPTIONAL: Add more content sections by copying the pattern above
-#  - title: "Examples"
-#    format: markdown
-#    value: |-
-#      ```typescript
-#      // Good: Use descriptive names
-#      interface UserProps {
-#        name: string;
-#        email: string;
-#      }
-#
-#      // Bad: Vague names
-#      interface Props {
-#        a: string;
-#        b: string;
-#      }
-#      ```
-
-# OPTIONAL: Reference external files (appears as @filename in Cursor)
+- title: "Core Principles"
+  format: markdown
+  value: |-
+    **1. Ownership and Borrowing**
+    - Design your APIs around clear ownership semantics
+    - Prefer borrowing (`&T`) over moving when you don't need ownership
+    - Use `&mut T` only when you need to modify data
+    - Avoid fighting the borrow checker—redesign your approach instead
+    
+    **2. Error Handling**
+    - Use `Result<T, E>` for recoverable errors, never `unwrap()` in production
+    - Use `Option<T>` for nullable values instead of null pointers
+    - Propagate errors with `?` operator for cleaner code
+    - Create custom error types that implement `std::error::Error`
+    
+    **3. Memory Safety**
+    - Leverage RAII (Resource Acquisition Is Initialization)
+    - Use smart pointers (`Box<T>`, `Rc<T>`, `Arc<T>`) when ownership is complex
+    - Prefer stack allocation over heap allocation when possible
+    - Use `Vec<T>` instead of raw arrays for dynamic data
+    
+    **4. Concurrency**
+    - Design with `Send` and `Sync` traits in mind
+    - Use `Arc<Mutex<T>>` for shared mutable state across threads
+    - Prefer channels for communication between threads
+    - Avoid `unsafe` blocks unless absolutely necessary
+    
+    **5. Performance**
+    - Profile before optimizing
+    - Use iterators instead of manual loops—they're zero-cost abstractions
+    - Prefer `&str` over `String` for string slices
+    - Use `Cow<str>` when you might need either borrowed or owned strings
+    
+    **6. Code Organization**
+    - Use modules to organize code logically
+    - Keep public APIs minimal and well-documented
+    - Write comprehensive tests alongside your code
+    - Use `cargo fmt` and `cargo clippy` consistently
+    
+    **7. Build and Release Management**
+    - Always use `cargo` to manage your Rust project—it handles dependencies, builds, and toolchain management
+    - Always use `rustfmt` (via `cargo fmt`) to format your `.rs` files consistently
+    - Always use `cargo check` to verify if your project can compile without generating executables
+    - Always use `cargo build` to create executables in `target/debug/` for development and testing
+    - Always use `cargo build --release` to build optimized executables when ready for production release
+- title: "Example Application"
+  format: markdown
+  value: |-
+    ```rust
+    // Good: Clear ownership, proper error handling
+    fn process_user_data(users: &[User]) -> Result<Vec<ProcessedUser>, ProcessingError> {
+        users
+            .iter()
+            .map(|user| user.process())
+            .collect()
+    }
+    
+    // Bad: Unnecessary cloning, poor error handling
+    fn process_user_data_bad(users: Vec<User>) -> Vec<ProcessedUser> {
+        users
+            .into_iter()
+            .map(|user| user.process().unwrap())
+            .collect()
+    }
+    ```
+- title: "Remember"
+  format: markdown
+  value: |-
+    The borrow checker is your friend, not your enemy. When it complains, it's preventing potential bugs, data races, and memory issues that would be runtime errors in other languages. Design your code to work with Rust's ownership system rather than against it.
 references: []             # Example: [@README.md, @docs/style-guide.md]
 
 # OPTIONAL: File patterns that trigger auto-attachment
