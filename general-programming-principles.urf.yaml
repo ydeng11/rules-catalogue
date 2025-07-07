@@ -2,10 +2,9 @@ id: general-programming-principles
 version: 0.1.0
 metadata:
   name: General Programming Principles
-  description: null
+  description: Core principles for writing robust, maintainable, and high-quality software across all programming languages and frameworks. Covers development process, code quality, testing, security, and maintenance best practices.
   tags: [programming]
   priority: 10
-  auto_apply: true
 content:
 - title: General Programming Principles
   format: markdown
@@ -87,4 +86,13 @@ content:
     - Remove unused code, configurations, and resources regularly to reduce attack surface and maintenance burden.
 references: []
 conditions: []
-tool_overrides: {}
+tool_overrides:
+  cursor:
+    # Application mode - how Cursor should apply this rule:
+    # • always: Apply to every chat and cmd-k session
+    # • intelligent: When Agent decides it's relevant (RECOMMENDED)
+    # • specific_files: When file matches specified patterns
+    # • manual: Only when @-mentioned by user
+    apply_mode: always          # Options: always | intelligent | specific_files | manual
+
+    globs: []                   # File patterns (only used when apply_mode is "specific_files")
